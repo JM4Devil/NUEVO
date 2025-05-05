@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2c6aa1;
+            --secondary: #5cbdb9;
+            --light: #f8f9fa;
+            --dark: #343a40;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("/api/placeholder/1200/800");
+            background-size: cover;
+            opacity: 0.1;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: #245580;
+            border-color: #245580;
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+        
+        .testimonial-card {
+            border-radius: 1rem;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .app-screenshot {
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .app-screenshot:hover {
+            transform: translateY(-10px);
+        }
+        
+        .footer {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 3rem 0;
+        }
+        
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-link {
+            font-weight: 600;
+            color: var(--dark);
+            margin: 0 10px;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+        }
+        
+        .btn-download {
+            border-radius: 30px;
+            padding: 10px 25px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-download:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .doctor-img {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .floating-card {
+            border-radius: 12px;
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            position: absolute;
+            max-width: 260px;
+        }
+        
+        .card-1 {
+            top: 20%;
+            left: -30px;
+            z-index: 3;
+        }
+        
+        .card-2 {
+            bottom: 15%;
+            right: -20px;
+            z-index: 3;
+        }
+        
+        .pulse-circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(92, 189, 185, 0.2);
+            position: absolute;
+            z-index: 1;
+            animation: pulse 2s infinite;
+        }
+        
+        .circle-1 {
+            top: 20%;
+            left: 10%;
+        }
+        
+        .circle-2 {
+            bottom: 30%;
+            right: 15%;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.7;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 0.3;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0.7;
+            }
+        }
+        
+        .rating {
+            color: #ffc107;
+        }
+        
+        .count-box {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        
+        .count-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .count-title {
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <span class="fw-bold text-primary">Medi</span><span class="fw-bold text-secondary">Connect</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#inicio">Inicio</a>
+                        <h1></h1>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#caracteristicas">Características</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#como-funciona">Cómo Funciona</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonios">Testimonios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contacto">Contacto</a>
+                    </li>
+                </ul>
+                <div class="ms-lg-3">
+                    <a href="#descargar" class="btn btn-primary btn-download">Descargar App</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h1 class="{display-4 fw-bold mb-4}">Tu salud en tus manos</h1>
+                    <h1>{{description}}</h1>
+                    <p class="lead mb-4">Consulta con médicos certificados desde la comodidad de tu hogar. Atención médica de calidad cuando la necesites, donde la necesites.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#descargar" class="btn btn-light btn-lg">Descargar Ahora</a>
+                        <a href="#como-funciona" class="btn btn-outline-light btn-lg">Cómo Funciona</a>
+                    </div>
+                    <div class="mt-4 d-flex align-items-center">
+                        <div class="me-3">
+                            <span class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </span>
+                        </div>
+                        <div>
+                            <p class="mb-0 text-light">4.8/5 basado en más de 10,000 reseñas</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 position-relative">
+                    <div class="position-relative">
+                        <img src="/api/placeholder/500/600" alt="Doctor usando la app" class="img-fluid doctor-img">
+                        <div class="floating-card card-1">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-calendar-check text-primary me-3" style="font-size: 24px;"></i>
+                                <div>
+                                    <p class="mb-0 fw-bold">Cita Programada</p>
+                                    <p class="mb-0 text-muted small">Dr. García - 14:30</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="floating-card card-2">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-heartbeat text-danger me-3" style="font-size: 24px;"></i>
+                                <div>
+                                    <p class="mb-0 fw-bold">Signos Vitales</p>
+                                    <p class="mb-0 text-muted small">Normales</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pulse-circle circle-1"></div>
+                        <div class="pulse-circle circle-2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-4 col-sm-6">
+                    <div class="count-box">
+                        <div class="count-number">500+</div>
+                        <h3 class="count-title">Médicos Certificados</h3>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="count-box">
+                        <div class="count-number">50,000+</div>
+                        <h3 class="count-title">Pacientes Satisfechos</h3>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="count-box">
+                        <div class="count-number">99%</div>
+                        <h3 class="count-title">Tasa de Satisfacción</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="caracteristicas" class="py-5">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-6 text-center">
+                    <h2 class="fw-bold mb-3">¿Por qué elegir MediConnect?</h2>
+                    <p class="text-muted">Nuestra aplicación está diseñada para hacer que la atención médica sea accesible para todos.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="p-4 h-100 bg-white rounded-lg shadow-sm">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <h3 class="h5 fw-bold">Médicos Certificados</h3>
+                        <p class="text-muted mb-0">Todos nuestros médicos están certificados y tienen años de experiencia en sus especialidades.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="p-4 h-100 bg-white rounded-lg shadow-sm">
+                        <div class="feature-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3 class="h5 fw-bold">Citas Instantáneas</h3>
+                        <p class="text-muted mb-0">Programa una cita en minutos y consulta con un médico el mismo día.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="p-4 h-100 bg-white rounded-lg shadow-sm">
+                        <div class="feature-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h3 class="h5 fw-bold">Consultas por Video</h3>
+                        <p class="text-muted mb-0">Consultas por videollamada en alta definición para una experiencia similar a la presencial.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="p-4 h-100 bg-white rounded-lg shadow-sm">
+                        <div class="feature-icon">
+                            <i class="fas fa-pills"></i>
+                        </div>
+                        <h3 class="h5 fw-bold">Recetas Digitales</h3>
+                        <p class="text-muted mb-0">Recibe tus recetas digitalmente y envíalas directamente a tu farmacia preferida.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="p-4 h-100 bg-white rounded-lg shadow-sm">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-medical-alt"></i>
+                        </div>
+                        <h3 class="h5 fw-bold">Historial Médico</h3>
+                        <p class="text-muted mb-0">Accede a tu historial médico completo en cualquier momento y desde cualquier lugar.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="p-4 h-100 bg-white rounded-lg shadow-sm">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="h5 fw-bold">Seguridad Garantizada</h3>
+                        <p class="text-muted mb-0">Tu información médica está protegida con los más altos estándares de seguridad.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="como-funciona" class="py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-6 text-center">
+                    <h2 class="fw-bold mb-3">¿Cómo funciona?</h2>
+                    <p class="text-muted">En solo 3 simples pasos puedes tener una consulta médica desde la comodidad de tu hogar.</p>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="text-center p-4">
+                        <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center mx-auto mb-4" style="width: 80px; height: 80px;">
+                            <i class="fas fa-download text-white fa-2x"></i>
+                        </div>
+                        <h3 class="h5 fw-bold">Paso 1: Descarga la app</h3>
+                        <p class="text-muted">Descarga nuestra aplicación desde App Store o Google Play Store.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="text-center p-4">
+                        <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center mx-auto mb-4" style="width: 80px; height: 80px;">
+                            <i class="fas fa-user-plus text-white fa-2x"></i>
+                        </div>
+                        <h3 class="h5 fw-bold">Paso 2: Crea tu perfil</h3>
+                        <p class="text-muted">Registra tu información básica y tu historial médico relevante.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="text-center p-4">
+                        <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center mx-auto mb-4" style="width: 80px; height: 80px;">
+                            <i class="fas fa-stethoscope text-white fa-2x"></i>
+                        </div>
+                        <h3 class="h5 fw-bold">Paso 3: Programa una cita</h3>
+                        <p class="text-muted">Elige un médico, fecha y hora que te convengan y comienza tu consulta.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-12 text-center">
+                    <img src="/api/placeholder/800/450" alt="MediConnect App en uso" class="img-fluid app-screenshot">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonios" class="py-5">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-6 text-center">
+                    <h2 class="fw-bold mb-3">Lo que dicen nuestros usuarios</h2>
+                    <p class="text-muted">Miles de pacientes satisfechos confían en MediConnect para su atención médica.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="testimonial-card card h-100">
+                        <div class="card-body p-4">
+                            <div class="rating mb-3">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="card-text">"MediConnect me salvó cuando mi hijo tuvo fiebre alta a medianoche. Pude consultar con un pediatra inmediatamente y recibir instrucciones claras. ¡Un servicio increíble!"</p>
+                            <div class="d-flex align-items-center mt-3">
+                                <div class="flex-shrink-0">
+                                    <img src="/api/placeholder/50/50" class="rounded-circle" alt="Testimonio de usuario">
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h5 class="mb-0">Laura Martínez</h5>
+                                    <p class="text-muted mb-0 small">Madre de dos hijos</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="testimonial-card card h-100">
+                        <div class="card-body p-4">
+                            <div class="rating mb-3">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="card-text">"Como persona con movilidad reducida, MediConnect ha sido un regalo del cielo. Ahora puedo recibir atención médica regular sin el estrés de desplazarme. Los médicos son profesionales y atentos."</p>
+                            <div class="d-flex align-items-center mt-3">
+                                <div class="flex-shrink-0">
+                                    <img src="/api/placeholder/50/50" class="rounded-circle" alt="Testimonio de usuario">
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h5 class="mb-0">Antonio Gómez</h5>
+                                    <p class="text-muted mb-0 small">Jubilado</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="testimonial-card card h-100">
+                        <div class="card-body p-4">
+                            <div class="rating mb-3">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <p class="card-text">"Mi trabajo me mantiene muy ocupada y me resultaba difícil encontrar tiempo para ir al médico. MediConnect me permite gestionar mi salud sin interrumpir mi agenda. La interfaz es intuitiva y los médicos son excelentes."</p>
+                            <div class="d-flex align-items-center mt-3">
+                                <div class="flex-shrink-0">
+                                    <img src="/api/placeholder/50/50" class="rounded-circle" alt="Testimonio de usuario">
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h5 class="mb-0">Carmen Rodríguez</h5>
+                                    <p class="text-muted mb-0 small">Ejecutiva</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="descargar" class="py-5 bg-primary text-white">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h2 class="fw-bold mb-4">Descarga MediConnect hoy mismo</h2>
+                    <p class="lead mb-4">Accede a atención médica de calidad cuando y donde la necesites. Disponible para iOS y Android.</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#" class="btn btn-light btn-lg d-inline-flex align-items-center">
+                            <i class="fab fa-apple me-2"></i> App Store
+                        </a>
+                        <a href="#" class="btn btn-light btn-lg d-inline-flex align-items-center">
+                            <i class="fab fa-google-play me-2"></i> Google Play
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img src="/api/placeholder/300/600" alt="MediConnect App" class="img-fluid app-screenshot">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="py-5">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-6 text-center">
+                    <h2 class="fw-bold mb-3">¿Tienes alguna pregunta?</h2>
+                    <p class="text-muted">Nuestro equipo de atención al cliente está disponible para ayudarte.</p>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body p-5">
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="name" class="form-label">Nombre completo</label>
+                                        <input type="text" class="form-control" id="name" placeholder="Tu nombre">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="email" class="form-label">Correo electrónico</label>
+                                        <input type="email" class="form-control" id="email" placeholder="Tu email">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="subject" class="form-label">Asunto</label>
+                                    <input type="text" class="form-control" id="subject" placeholder="Asunto del mensaje">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Mensaje</label>
+                                    <textarea class="form-control" id="message" rows="5" placeholder="Tu mensaje"></textarea>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary btn-lg px-5">Enviar mensaje</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h3 class="fw-bold mb-4"><span class="text-primary">Medi</span><span class="text-secondary">Connect</span></h3>
+                    <p>Tu salud en tus manos. Atención médica de calidad cuando la necesites, donde la necesites.</p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="text-light"><i class="fab fa-facebook-f fa-lg"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase mb-4">Enlaces</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#inicio" class="text-light text-decoration-none">Inicio</a></li>
+                        <li class="mb-2"><a href="#caracteristicas" class="text-light text-decoration-none">Características</a></li>
+                        <li class="mb-2"><a href="#como-funciona" class="text-light text-decoration-none">Cómo Funciona</a></li>
+                        <li class="mb-2"><a href="#testimonios" class="text-light text-decoration-none">Testimonios</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase mb-4">Soporte</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">FAQ</a></li>
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">Ayuda</a></li>
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">Términos</a></li>
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">Privacidad</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="text-uppercase mb-4">Contacto</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> Av. Principal 123, Madrid, España</li>
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i> +34 91 123 45 67</li>
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> info@mediconnect.com</li>
+                    </ul>
+                    <div class="mt-4">
+                        <form>
+                            <div class="input-group mb-3">
+                                <input type="email" class="form-control" placeholder="Tu email" aria-label="Email" aria-describedby="button-addon2">
+                                <button class="btn btn-outline-light" type="button" id="button-addon2">Suscribir</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 bg-light">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">© 2025 MediConnect. Todos los derechos reservados.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0">Diseñado por <a href="#" class="text-secondary text-decoration-none">ExpertDesign</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
